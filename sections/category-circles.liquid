@@ -1,0 +1,106 @@
+<style>
+  .category-circles {
+    padding: 40px 20px;
+    background-color: var(--mela-ivory);
+  }
+  .category-circles-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--mela-indigo);
+    margin: 0 0 30px 0;
+    text-align: center;
+  }
+  .category-circles-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow-x: auto;
+  }
+  .category-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .category-circle-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mela-marigold), var(--mela-rani));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    transition: transform 0.3s;
+  }
+  .category-circle:hover .category-circle-icon {
+    transform: scale(1.1);
+  }
+  .category-circle-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--mela-indigo);
+    font-weight: 500;
+    text-align: center;
+  }
+</style>
+
+<div class="category-circles">
+  <h2 class="category-circles-title">{{ section.settings.title }}</h2>
+  <div class="category-circles-grid">
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.collection.url }}" class="category-circle" {{ block.shopify_attributes }}>
+        <div class="category-circle-icon">{{ block.settings.emoji }}</div>
+        <div class="category-circle-label">{{ block.settings.title }}</div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category circles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Shop by category"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category name",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji icon",
+          "default": "👕"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category circles"
+    }
+  ]
+}
+{% endschema %}

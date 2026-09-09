@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "title": "Welcome to Mela",
+        "subtitle": "Discover fashion & home treasures"
+      }
+    },
+    "categories": {
+      "type": "category-circles",
+      "settings": {
+        "title": "Shop by category"
+      }
+    },
+    "flash-deals": {
+      "type": "flash-deals",
+      "settings": {}
+    },
+    "featured-products": {
+      "type": "product-grid",
+      "settings": {
+        "title": "Featured products",
+        "products_count": 8
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "categories", "flash-deals", "featured-products", "trust"]
+}

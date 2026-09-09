@@ -1,0 +1,84 @@
+<style>
+  .trust-strip {
+    background-color: var(--mela-ivory);
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .trust-icon {
+    font-size: 32px;
+    width: 50px;
+    text-align: center;
+  }
+  .trust-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .trust-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--mela-indigo);
+  }
+  .trust-subtitle {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: #666;
+  }
+</style>
+
+<div class="trust-strip">
+  <div class="trust-item">
+    <div class="trust-icon">✓</div>
+    <div class="trust-content">
+      <div class="trust-title">Verified Sellers</div>
+      <div class="trust-subtitle">100% authentic products</div>
+    </div>
+  </div>
+  
+  <div class="trust-item">
+    <div class="trust-icon">↩️</div>
+    <div class="trust-content">
+      <div class="trust-title">Easy Returns</div>
+      <div class="trust-subtitle">14-day return policy</div>
+    </div>
+  </div>
+  
+  <div class="trust-item">
+    <div class="trust-icon">🚚</div>
+    <div class="trust-content">
+      <div class="trust-title">Fast Delivery</div>
+      <div class="trust-subtitle">Pan-India shipping</div>
+    </div>
+  </div>
+  
+  <div class="trust-item">
+    <div class="trust-icon">🔒</div>
+    <div class="trust-content">
+      <div class="trust-title">Secure Payment</div>
+      <div class="trust-subtitle">SSL encrypted checkout</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "presets": [
+    {
+      "name": "Trust strip"
+    }
+  ]
+}
+{% endschema %}

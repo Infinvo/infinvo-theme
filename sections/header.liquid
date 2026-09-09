@@ -1,0 +1,80 @@
+<style>
+  .header {
+    background-color: var(--mela-ivory);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .header-logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--mela-indigo);
+    text-decoration: none;
+  }
+  .header-search {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 40px;
+  }
+  .header-search input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+  .header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .header-icon {
+    cursor: pointer;
+    color: var(--mela-indigo);
+    font-size: 20px;
+    text-decoration: none;
+  }
+</style>
+
+<header class="header">
+  <a href="{{ routes.root_url }}" class="header-logo">
+    {% if section.settings.logo %}
+      <img src="{{ section.settings.logo | image_url: width: 150 }}" alt="{{ shop.name }}" style="max-height: 40px;">
+    {% else %}
+      {{ shop.name | downcase }}
+    {% endif %}
+  </a>
+  
+  <div class="header-search">
+    <form action="{{ routes.search_url }}" method="get">
+      <input type="text" name="q" placeholder="Search products..." value="{{ search.terms | escape }}">
+    </form>
+  </div>
+  
+  <div class="header-icons">
+    <a href="{{ routes.account_url }}" class="header-icon" title="Account">👤</a>
+    <a href="{{ routes.cart_url }}" class="header-icon" title="Cart">🛒</a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

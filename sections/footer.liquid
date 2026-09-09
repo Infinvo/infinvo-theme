@@ -1,0 +1,134 @@
+<style>
+  .footer {
+    background-color: var(--mela-indigo);
+    color: var(--mela-ivory);
+    padding: 40px 20px 20px;
+  }
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-column-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .footer-column-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-column-links a {
+    color: var(--mela-ivory);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  .footer-column-links a:hover {
+    color: var(--mela-marigold);
+  }
+  .footer-newsletter {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  .footer-newsletter-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .footer-newsletter-form {
+    display: flex;
+    gap: 8px;
+  }
+  .footer-newsletter-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .footer-newsletter-button {
+    background-color: var(--mela-marigold);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 12px;
+  }
+</style>
+
+<footer class="footer">
+  <div class="footer-newsletter">
+    <h3 class="footer-newsletter-title">Subscribe to our newsletter</h3>
+    <form class="footer-newsletter-form" action="#">
+      <input type="email" class="footer-newsletter-input" placeholder="Enter your email" required>
+      <button type="submit" class="footer-newsletter-button">Subscribe</button>
+    </form>
+  </div>
+  
+  <div class="footer-columns">
+    {% for block in section.blocks %}
+      <div class="footer-column" {{ block.shopify_attributes }}>
+        <h4 class="footer-column-title">{{ block.settings.title }}</h4>
+        <div class="footer-column-links">
+          {% if block.settings.menu %}
+            {% for link in block.settings.menu.links %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Footer column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column title",
+          "default": "Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

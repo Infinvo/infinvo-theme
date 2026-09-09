@@ -1,0 +1,73 @@
+<style>
+  .category-nav {
+    background-color: var(--mela-ivory);
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 20px;
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .category-nav-item {
+    text-decoration: none;
+    color: var(--mela-indigo);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .category-nav-item:hover {
+    border-bottom-color: var(--mela-marigold);
+  }
+</style>
+
+<nav class="category-nav">
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.collection.url }}" class="category-nav-item" {{ block.shopify_attributes }}>
+        {{ block.settings.title }}
+      </a>
+    {% endfor %}
+  {% else %}
+    <a href="#" class="category-nav-item">Fashion</a>
+    <a href="#" class="category-nav-item">Home</a>
+    <a href="#" class="category-nav-item">Accessories</a>
+    <a href="#" class="category-nav-item">Trending</a>
+  {% endif %}
+</nav>
+
+{% schema %}
+{
+  "name": "Category navigation",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category name",
+          "default": "Category"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category navigation"
+    }
+  ]
+}
+{% endschema %}

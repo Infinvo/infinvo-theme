@@ -1,0 +1,112 @@
+<style>
+  .flash-deals {
+    background: linear-gradient(135deg, var(--mela-indigo), #1a1a4d);
+    padding: 30px 20px;
+    border-radius: 8px;
+    margin: 20px;
+    color: white;
+  }
+  .flash-deals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .flash-deals-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .flash-deals-timer {
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+  .flash-deals-countdown {
+    display: flex;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .flash-deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  .flash-deals-product {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .flash-deals-product:hover {
+    transform: translateY(-4px);
+  }
+  .flash-deals-product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .flash-deals-product-info {
+    padding: 12px;
+    color: var(--mela-indigo);
+  }
+  .flash-deals-discount {
+    background-color: var(--mela-rani);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+</style>
+
+<div class="flash-deals">
+  <div class="flash-deals-header">
+    <h2 class="flash-deals-title">⚡ Flash Deals</h2>
+    <div class="flash-deals-timer">
+      Ends in: <span class="flash-deals-countdown" data-end-time="{{ section.settings.countdown_end }}"></span>
+    </div>
+  </div>
+  
+  <div class="flash-deals-grid">
+    {% if section.settings.collection %}
+      {% for product in section.settings.collection.products limit: 8 %}
+        <a href="{{ product.url }}" class="flash-deals-product">
+          <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title }}" class="flash-deals-product-image">
+          <div class="flash-deals-product-info">
+            <div class="flash-deals-discount">-30%</div>
+            <p style="font-size: 12px; margin: 0;">{{ product.title | truncatewords: 3 }}</p>
+            <p style="font-weight: 600; margin: 4px 0 0 0;">₹{{ product.price | money_without_currency }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Flash deals",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Countdown end (format: 2026-09-20T23:59:00)",
+      "default": "2026-09-20T23:59:00"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flash deals"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+<style>
+  .announcement-bar {
+    background-color: var(--mela-indigo);
+    color: var(--mela-ivory);
+    padding: 12px 20px;
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .announcement-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>
+
+<div class="announcement-bar">
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      <div class="announcement-item" {{ block.shopify_attributes }}>
+        <span>{{ block.settings.text }}</span>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="announcement-item">
+      <span>🚚 Free delivery on orders above ₹499</span>
+    </div>
+    <div class="announcement-item">
+      <span>📦 Easy returns within 14 days</span>
+    </div>
+    <div class="announcement-item">
+      <span>🛡️ Secure payment guaranteed</span>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Announcement text",
+          "default": "🚚 Free delivery on orders above ₹499"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}
